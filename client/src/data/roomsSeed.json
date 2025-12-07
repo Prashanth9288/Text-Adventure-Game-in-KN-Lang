@@ -1,0 +1,70 @@
+[
+  {
+    "id": "start",
+    "name": "Dark Antechamber",
+    "description": "You stand in a dimly lit antechamber. Cold stone walls surround you.",
+    "items": ["lint"],
+    "exits": { "north": "hallway", "west": "kitchen" },
+    "puzzle": null
+  },
+  {
+    "id": "hallway",
+    "name": "Grand Hallway",
+    "description": "A long hallway with portraits of forgotten coding ancestors.",
+    "items": ["rusty key"],
+    "exits": { "south": "start", "east": "library", "west": "armory" },
+    "puzzle": null
+  },
+  {
+    "id": "library",
+    "name": "Dusty Library",
+    "description": "Rows of ancient documentation. A strange box sits on a pedestal.",
+    "items": ["torn page"],
+    "exits": { "west": "hallway" },
+    "puzzle": {
+      "type": "riddle",
+      "requirement": "echo",
+      "text": "A riddle box blocks access to the rare loot.",
+      "hint": "It comes back to you.",
+      "reward": "ancient scroll",
+      "solved": false
+    }
+  },
+  {
+    "id": "armory",
+    "name": "Old Armory",
+    "description": "Racks of rusted weapons. One door looks sturdy.",
+    "items": ["sword"],
+    "exits": {
+      "east": "hallway",
+      "north": {
+        "roomId": "treasure_room",
+        "locked": true,
+        "keyItem": "rusty key",
+        "failureMessage": "The door stares at you blankly. Perhaps it’s missing something — like a key?"
+      }
+    }
+  },
+  {
+    "id": "treasure_room",
+    "name": "Treasure Vault",
+    "description": "Glittering gold and artifacts! You made it!",
+    "items": ["gold coin", "feather"],
+    "exits": { "south": "armory" },
+    "puzzle": null
+  },
+  {
+    "id": "garden",
+    "name": "Overgrown Garden",
+    "description": "Nature has reclaimed this place.",
+    "items": ["strange flower"],
+    "exits": { "south": "kitchen" }
+  },
+  {
+    "id": "kitchen",
+    "name": "Abandoned Kitchen",
+    "description": "Smells of faint rot and old spices.",
+    "items": ["knife"],
+    "exits": { "north": "garden", "east": "start" }
+  }
+]
