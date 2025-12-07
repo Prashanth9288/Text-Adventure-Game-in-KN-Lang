@@ -15,15 +15,15 @@ export const GameManagerProvider = ({ children }) => {
     puzzlesSolved: 0
   });
   
-  // Ref to hold the mutable logic instance
+
   const gameManagerRef = useRef(null);
 
   useEffect(() => {
-    // Initialize Logic
+
     if (!gameManagerRef.current) {
         gameManagerRef.current = new GameManager(setTerminalOutput, setPlayerState);
         
-        // Fetch rooms
+    
         const initGame = async () => {
              let rooms = fallbackRooms;
              try {
@@ -35,10 +35,7 @@ export const GameManagerProvider = ({ children }) => {
                  console.warn("Using offline fallback rooms");
              }
              
-             // Prompt user for name or auto-start?
-             // Simple version: Defaults to "Ghost"
-             // Or we can simulate a login flow in terminal. 
-             // For now, auto-start.
+             
              gameManagerRef.current.startGame("Traveler", rooms);
         };
         initGame();

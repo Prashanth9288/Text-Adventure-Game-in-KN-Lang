@@ -4,7 +4,7 @@ import { useGame } from '../contexts/GameManagerContext';
 export default function InventoryPanel() {
   const { playerState } = useGame();
   
-  // Debug mode check
+
   const params = new URLSearchParams(window.location.search);
   const isDebug = params.get('debug') === 'true';
 

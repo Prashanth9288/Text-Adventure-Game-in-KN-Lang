@@ -11,7 +11,7 @@ const playerSchema = new mongoose.Schema({
     default: []
   },
   currentRoom: {
-    type: String, // Room ID
+    type: String, 
     required: true
   },
   puzzlesSolved: {
