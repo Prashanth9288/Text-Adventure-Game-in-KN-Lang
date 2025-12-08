@@ -29,8 +29,8 @@ This project follows a strict "Squad" architecture:
 ```bash
 cd server
 npm install
-npm run seed   # Seeds the database with rooms
-npm run dev    # Starts server on port 3000
+npm run seed  
+npm run dev   
 ```
 
 ### 3. Client Setup
@@ -40,7 +40,7 @@ Open a new terminal:
 ```bash
 cd client
 npm install
-npm run dev    # Starts frontend (usually port 5173)
+npm run dev   
 ```
 
 ## Gameplay & Walkthrough
