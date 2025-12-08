@@ -79,10 +79,15 @@ roomsData[0].exits.west = "kitchen";
 roomsData[2].puzzle.question = "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?";
 
 
-const seedDB = async () => {
+// Wrap logic in a function
+const seedRooms = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kn_adventure');
-    console.log('Connected to MongoDB');
+    // If we are running this file directly, we need to connect. 
+    // If imported, we assume connection exists.
+    if (require.main === module) {
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kn_adventure');
+        console.log('Connected to MongoDB');
+    }
 
     await Room.deleteMany({});
     await Player.deleteMany({});
@@ -99,11 +104,19 @@ const seedDB = async () => {
     });
     console.log('Dev player seeded');
 
-    process.exit(0);
+    if (require.main === module) {
+        process.exit(0);
+    }
   } catch (err) {
     console.error(err);
-    process.exit(1);
+    if (require.main === module) {
+        process.exit(1);
+    }
   }
 };
 
-seedDB();
+if (require.main === module) {
+    seedRooms();
+}
+
+module.exports = { seedRooms };

@@ -13,8 +13,28 @@ app.use(cors());
 app.use(express.json());
 
 // Database Connection
+const { seedRooms } = require('./seed');
+
+// Database Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kn_adventure')
-  .then(() => console.log('MongoDB connected'))
+  .then(async () => {
+    console.log('MongoDB connected');
+    // Auto-seed if empty
+    try {
+      const roomCount = await Room.countDocuments();
+      if (roomCount === 0) {
+        console.log('Database empty. Auto-seeding rooms...');
+        await seedRooms();
+      }
+    } catch (err) {
+      console.error('Auto-seed check failed:', err);
+    }
+
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
   .catch(err => console.error('MongoDB connection error:', err));
 
 // --- INLINE ROUTES ---
@@ -112,6 +132,4 @@ app.post('/api/seed', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+

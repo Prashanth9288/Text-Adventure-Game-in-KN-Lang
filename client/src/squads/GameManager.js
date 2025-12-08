@@ -192,7 +192,7 @@ export class GameManager {
       }
     } catch (err) {
       console.error(err);
-      response = "The game universe hiccuped. Try again.";
+      response = "The game universe hiccuped. (If this persists, the server might be empty. Try restarting the backend to auto-seed).";
     }
 
     if (response) {
